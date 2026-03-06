@@ -1,0 +1,159 @@
+.courses-section {
+  background-color: var(--white);
+}
+
+.courses-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem; 
+  margin: 3.5rem auto 0;
+  padding: 1rem;
+  max-width: 1200px; /* Wider for gallery */
+  height: 500px; /* Fixed height for horizontal accordion */
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .courses-grid {
+    flex-direction: column; /* Stack vertically on smaller screens */
+    height: auto;
+  }
+}
+
+.course-card {
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother, less bouncy transition */
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex; 
+  flex-direction: column;
+  box-shadow: 0 10px 30px -10px rgba(31, 38, 135, 0.15);
+  
+  flex: 1; /* Shrunk inactive state */
+  min-width: 80px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .course-card {
+    min-height: 80px; /* Shrunk vertical state on mobile */
+  }
+}
+
+.course-card.active {
+  flex: 6; /* Expand active state */
+  box-shadow: 0 20px 40px -10px rgba(15, 118, 110, 0.3);
+  border-color: var(--primary-light);
+  transform: scale(1.02);
+}
+
+.course-header {
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.8), rgba(17, 94, 89, 0.9));
+  padding: 1.5rem;
+  color: var(--white);
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.course-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  white-space: nowrap; /* Prevent breaking when shrunk */
+}
+
+/* Vertical text for inactive desktop cards */
+@media (min-width: 901px) {
+  .course-card:not(.active) .course-header {
+    height: 100%;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  
+  .course-card.active .course-header {
+    height: auto;
+  }
+}
+
+/* Full height header for minimal mobile tab */
+@media (max-width: 900px) {
+  .course-card:not(.active) .course-header {
+    height: 100%;
+  }
+}
+
+.course-body {
+  padding: 2rem 2.5rem; 
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  flex-grow: 1; 
+  opacity: 0;
+  overflow-y: auto;
+}
+
+.course-card.active .course-body {
+  display: flex;
+  animation: fadeInBody 0.6s ease forwards 0.3s; /* Delay fade in until expansion finishes */
+}
+
+@keyframes fadeInBody {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.course-desc {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.course-details {
+  margin-bottom: 1.5rem;
+}
+
+.course-details li {
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-details li strong {
+  color: var(--text-main);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.text-highlight {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center;
+}
+
+.mt-3 {
+  margin-top: auto; /* Push button to the bottom */
+  padding-top: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}

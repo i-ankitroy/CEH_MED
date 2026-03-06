@@ -1,0 +1,114 @@
+.hero {
+  min-height: calc(100vh - var(--nav-height)); /* Ensure it takes full viewport height minus nav */
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--nav-height) + 2rem); /* Add navbar height to the top padding to push it down */
+  padding-bottom: 4rem;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(15, 118, 110, 0.1) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Give more space to image */
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text {
+  max-width: 600px;
+  padding-left: 1rem; /* Aligns with the 1rem padding of the navbar logo */
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1.25rem; /* Slightly reduced vertical padding so it isn't overly tall */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--primary-dark);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  margin-left: 0; /* Ensuring no left margin shifts it */
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.hero-text h1 {
+  font-size: 4.5rem; /* Larger hero title */
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.hero-text h1 span {
+  color: var(--primary-color);
+  display: block;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-image {
+  border-radius: 24px;
+  overflow: hidden;
+  padding: 1rem;
+  animation-delay: 0.2s;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(31, 38, 135, 0.15);
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 968px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero-text {
+    margin: 0 auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+}
