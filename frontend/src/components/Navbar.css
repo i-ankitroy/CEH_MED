@@ -1,14 +1,24 @@
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--nav-height);
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  height: calc(var(--nav-height) - 1rem); /* slightly thinner */
   z-index: 1000;
-  border-radius: 0;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  border-radius: 50px; /* Pill shape */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px -10px rgba(15, 118, 110, 0.2);
+  transition: all 0.3s ease;
+}
+
+.navbar:hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 15px 35px -5px rgba(15, 118, 110, 0.3);
 }
 
 .nav-content {
@@ -16,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
-  padding: 0 1rem; /* Added extra padding so logo isn't so close to edge */
+  padding: 0 2rem; /* Increased padding for the pill ends */
 }
 
 .logo {

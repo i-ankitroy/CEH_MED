@@ -1,5 +1,5 @@
 .courses-section {
-  background-color: var(--white);
+  background-color: transparent;
 }
 
 .courses-grid {
@@ -21,11 +21,9 @@
 }
 
 .course-card {
-  border-radius: 24px;
+  border-radius: 40px; /* Softer, larger radius to match pill aesthetic */
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother, less bouncy transition */
-  animation: fadeInUp 0.5s ease-out forwards;
-  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgba(255, 255, 255, 0.6);
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
@@ -47,13 +45,13 @@
 
 .course-card.active {
   flex: 6; /* Expand active state */
-  box-shadow: 0 20px 40px -10px rgba(15, 118, 110, 0.3);
-  border-color: var(--primary-light);
+  box-shadow: 0 20px 40px -10px rgba(13, 148, 136, 0.4); /* Vibrant teal shadow */
+  border-color: #14b8a6;
   transform: scale(1.02);
 }
 
 .course-header {
-  background: linear-gradient(135deg, rgba(15, 118, 110, 0.8), rgba(17, 94, 89, 0.9));
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.85), rgba(15, 118, 110, 0.95)); /* Lighter, vibrant teal */
   padding: 1.5rem;
   color: var(--white);
   text-align: center;
@@ -135,7 +133,7 @@
 }
 
 .text-highlight {
-  color: var(--primary-color);
+  color: #0d9488; /* Vibrant text */
   font-weight: 600;
 }
 

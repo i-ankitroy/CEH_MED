@@ -1,6 +1,7 @@
 .faculty-section {
   background-color: transparent;
   position: relative;
+  overflow: hidden; /* Prevent 3d overflow from causing scroll */
 }
 
 .director-card {
@@ -14,7 +15,7 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
+  border-radius: 40px; /* Matched to global pill radius */
   box-shadow: 0 10px 30px -10px rgba(31, 38, 135, 0.15);
 }
 
@@ -41,89 +42,132 @@
   color: var(--text-muted);
 }
 
-.sub-heading {
-  font-size: 2rem;
-  color: var(--text-main);
-  margin-bottom: 2rem;
+/* 3D Carousel Layout */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  height: 400px; /* Space for the cards */
+  perspective: 1000px;
 }
 
-.text-center {
-  text-align: center;
-}
-
-.faculty-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 2rem; 
-  padding: 1rem;
-  margin: 3rem auto 0;
-  max-width: 1200px; /* Constrain max width for better appearance */
-}
-
-@media (max-width: 1024px) {
-  .faculty-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .faculty-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .faculty-grid {
-    grid-template-columns: 1fr;
-  }
+.carousel-track {
+  position: relative;
+  width: 300px; /* Width of central card */
+  height: 350px; /* Height of central card */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
 }
 
 .faculty-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 2.5rem 1.5rem; 
   text-align: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  animation-duration: 0.5s;
-  border-radius: 20px; 
+  border-radius: 40px; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 10px 30px -10px rgba(31, 38, 135, 0.15);
+  cursor: pointer;
+  will-change: transform, opacity;
 }
 
-.faculty-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 20px 40px -10px rgba(15, 118, 110, 0.2);
-  border-color: var(--primary-color);
+.faculty-card.active-member {
+  box-shadow: 0 25px 50px -12px rgba(13, 148, 136, 0.4);
+  border-color: #14b8a6;
 }
 
 .faculty-avatar {
-  width: 60px;
-  height: 60px;
-  background: var(--primary-light);
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
   color: white;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  margin: 0 auto 1rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 10px 20px -5px rgba(13, 148, 136, 0.4);
 }
 
 .faculty-card h4 {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: var(--text-main);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
 }
 
 .faculty-card p {
-  color: var(--text-muted);
-  font-size: 0.875rem;
+  color: #0f766e;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Carousel Controls */
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  color: #0f766e;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.carousel-control:hover {
+  background: #0f766e;
+  color: white;
+  box-shadow: 0 8px 25px rgba(13, 148, 136, 0.4);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control.prev {
+  left: -20px;
+}
+
+.carousel-control.next {
+  right: -20px;
+}
+
+@media (max-width: 900px) {
+  .carousel-track {
+    width: 250px;
+    height: 300px;
+  }
+  
+  .carousel-control.prev {
+    left: 10px;
+  }
+
+  .carousel-control.next {
+    right: 10px;
+  }
 }
 
 @media (max-width: 768px) {

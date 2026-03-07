@@ -1,8 +1,8 @@
 .hero {
-  min-height: calc(100vh - var(--nav-height)); /* Ensure it takes full viewport height minus nav */
+  min-height: 100vh; 
   display: flex;
   align-items: center;
-  padding-top: calc(var(--nav-height) + 2rem); /* Add navbar height to the top padding to push it down */
+  padding-top: calc(var(--nav-height) + 4rem); /* Account for floating navbar */
   padding-bottom: 4rem;
   position: relative;
   overflow: hidden;

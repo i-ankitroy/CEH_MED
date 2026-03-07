@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import './Contact.css';
 
 const Contact = () => {
@@ -35,13 +36,26 @@ const Contact = () => {
   return (
     <section className="contact-section" id="contact">
       <div className="container">
-        <h2 className="section-title">Contact & Admission</h2>
-        <p className="section-subtitle">
-          Ready to start your journey in Electro Homeopathy? Reach out to us today.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">Contact & Admission</h2>
+          <p className="section-subtitle">
+            Ready to start your journey in Electro Homeopathy? Reach out to us today.
+          </p>
+        </motion.div>
 
         <div className="contact-grid">
-          <div className="contact-info glass-panel">
+          <motion.div 
+            className="contact-info glass-panel"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <h3>Contact Information</h3>
             <p><strong>Phones:</strong> 9308795335, 9304475364</p>
             <div className="location">
@@ -54,9 +68,16 @@ const Contact = () => {
               <p>Near Kali Mandir</p>
               <p>Bartand, Narayanpur, Telidih Road, Chas, Bokaro</p>
             </div>
-          </div>
+          </motion.div>
 
-          <form className="contact-form glass-panel" onSubmit={handleSubmit}>
+          <motion.form 
+            className="contact-form glass-panel" 
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
             <h3>Enquiry / Admission Form</h3>
             {status === 'success' && <div className="alert-success">Message sent successfully! We will contact you soon.</div>}
             {status === 'error' && <div className="alert-error">Failed to send message. Please try again.</div>}
@@ -83,7 +104,7 @@ const Contact = () => {
             </div>
 
             <button type="submit" className="btn btn-primary w-100">Submit Enquiry</button>
-          </form>
+          </motion.form>
         </div>
       </div>
     </section>

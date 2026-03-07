@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import './Facilities.css';
 
 const features = [
@@ -11,24 +12,42 @@ const features = [
   { icon: '💻', title: 'Flexibility', desc: 'Both Online & Offline Classes Available.' },
 ];
 
+// Duplicate the array to create a seamless infinite loop
+const duplicatedFeatures = [...features, ...features];
+
 const Facilities = () => {
   return (
     <section className="facilities-section" id="facilities">
-      <div className="container">
+      <div className="container" style={{ maxWidth: '100%', padding: '0 1rem' }}>
         <h2 className="section-title">Our Facilities</h2>
         <p className="section-subtitle">
           We provide a conducive environment equipped with all the essentials for an 
           excellent educational journey.
         </p>
 
-        <div className="facilities-grid">
-          {features.map((item, index) => (
-            <div key={index} className="facility-item glass-panel animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="facility-icon">{item.icon}</div>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </div>
-          ))}
+        <div className="marquee-container">
+          <motion.div 
+            className="marquee-track"
+            animate={{
+              x: ['0%', '-50%'] 
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: 'loop',
+                duration: 35, // Smooth scrolling speed
+                ease: 'linear',
+              },
+            }}
+          >
+            {duplicatedFeatures.map((item, index) => (
+              <div key={index} className="facility-item glass-panel">
+                <div className="facility-icon">{item.icon}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
