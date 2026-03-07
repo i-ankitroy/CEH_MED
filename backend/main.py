@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.router import api_router
+from database import engine, Base
+import models
+
+# Create database tables if they do not exist
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="CEH Medical Institute API")
 

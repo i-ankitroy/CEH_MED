@@ -1,6 +1,10 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, BackgroundTasks
 from pydantic import BaseModel
 from typing import List, Optional
+from sqlalchemy.orm import Session
+from database import get_db
+import models
+from email_service import send_inquiry_email
 
 api_router = APIRouter()
 
@@ -83,7 +87,25 @@ def get_faculty():
     return FACULTY
 
 @api_router.post("/contact")
-def submit_contact(inquiry: ContactInquiry):
-    # In a real app we'd save it to a DB. For now, just log and return success.
-    print(f"Received inquiry from {inquiry.name} ({inquiry.email}, {inquiry.phone}): {inquiry.message}")
+def submit_contact(inquiry: ContactInquiry, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    # Save to database
+    db_inquiry = models.Inquiry(
+        name=inquiry.name,
+        email=inquiry.email,
+        phone=inquiry.phone,
+        message=inquiry.message
+    )
+    db.add(db_inquiry)
+    db.commit()
+    db.refresh(db_inquiry)
+    
+    # Trigger asynchronous email notification
+    background_tasks.add_task(
+        send_inquiry_email,
+        name=inquiry.name,
+        email=inquiry.email,
+        phone=inquiry.phone,
+        message_text=inquiry.message
+    )
+    
     return {"status": "success", "message": "Inquiry received successfully. We will get back to you soon!"}
