@@ -28,31 +28,7 @@
   margin-bottom: 1.5rem;
 }
 
-.contact-info > p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: var(--text-main);
-}
 
-.location {
-  margin-bottom: 2rem;
-}
-
-.location h4 {
-  font-size: 1.1rem;
-  color: var(--text-main);
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.location p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 0.25rem;
-}
 
 .contact-form {
   padding: 3rem;
