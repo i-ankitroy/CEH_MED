@@ -39,7 +39,7 @@ const Contact = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="section-title">Contact & Admission</h2>
@@ -50,35 +50,53 @@ const Contact = () => {
 
         <div className="contact-grid">
           <motion.div 
-            className="contact-info glass-panel"
-            initial={{ opacity: 0, x: -50 }}
+            className="contact-info"
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.2 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <h3>Contact Information</h3>
-            <p><strong>Phones:</strong> 9308795335, 9304475364</p>
-            <div className="location">
-              <h4>🏢 Office Location</h4>
-              <p>Electro Homoeo Health Care</p>
-              <p>Telidih road, Chas (Near Kushwaha Bhawan)</p>
+            <h3 style={{ marginBottom: '2rem' }}>Get in Touch</h3>
+            
+            <div className="contact-info-block">
+              <div className="contact-icon">📞</div>
+              <div className="contact-details">
+                <h4>Phone Numbers</h4>
+                <p>+91 93087 95335</p>
+                <p>+91 93044 75364</p>
+              </div>
             </div>
-            <div className="location">
-              <h4>🏫 Institute Location</h4>
-              <p>Near Kali Mandir</p>
-              <p>Bartand, Narayanpur, Telidih Road, Chas, Bokaro</p>
+
+            <div className="contact-info-block">
+              <div className="contact-icon">🏢</div>
+              <div className="contact-details">
+                <h4>Office Location</h4>
+                <p>Electro Homoeo Health Care</p>
+                <p>Telidih road, Chas (Near Kushwaha Bhawan)</p>
+              </div>
+            </div>
+
+            <div className="contact-info-block" style={{ marginBottom: 0 }}>
+              <div className="contact-icon">🏫</div>
+              <div className="contact-details">
+                <h4>Institute Location</h4>
+                <p>Near Kali Mandir</p>
+                <p>Bartand, Narayanpur, Telidih Road, Chas, Bokaro</p>
+              </div>
             </div>
           </motion.div>
 
           <motion.form 
-            className="contact-form glass-panel" 
+            className="contact-form" 
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: false, amount: 0.2 }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
           >
-            <h3>Enquiry / Admission Form</h3>
+            <h3 style={{ marginBottom: '2rem' }}>Admission Enquiry</h3>
             {status === 'success' && <div className="alert-success">Message sent successfully! We will contact you soon.</div>}
             {status === 'error' && <div className="alert-error">Failed to send message. Please try again.</div>}
             

@@ -8,7 +8,7 @@ const Courses = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/courses')
+    fetch('http://localhost:8000/api/courses')
       .then(res => res.json())
       .then(data => {
         setCourses(data);
@@ -23,10 +23,17 @@ const Courses = () => {
   return (
     <section className="courses-section" id="courses">
       <div className="container">
-        <h2 className="section-title">Programs Offered</h2>
-        <p className="section-subtitle">
-          Comprehensive electro homeopathy courses designed to build your medical career.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">Programs Offered</h2>
+          <p className="section-subtitle">
+            Comprehensive electro homeopathy courses designed to build your medical career.
+          </p>
+        </motion.div>
 
         {loading ? (
           <div className="loading">Loading courses...</div>
@@ -38,8 +45,8 @@ const Courses = () => {
                 className={`course-card glass-panel ${activeIndex === index ? 'active' : ''}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
                 onMouseEnter={() => setActiveIndex(index)}
                 onClick={() => setActiveIndex(index)}
               >

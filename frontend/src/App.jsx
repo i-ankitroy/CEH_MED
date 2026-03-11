@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Courses from './components/Courses';
-import Faculty from './components/Faculty';
-import Facilities from './components/Facilities';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+
+// Lazy-load below-the-fold sections to defer JS parse cost
+const Courses = lazy(() => import('./components/Courses'));
+const Faculty = lazy(() => import('./components/Faculty'));
+const Facilities = lazy(() => import('./components/Facilities'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 
 function App() {
   return (
     <div className="app-container">
       <Navbar />
       <Hero />
-      <Courses />
-      <Faculty />
-      <Facilities />
-      <Contact />
-      <Footer />
+      <Suspense fallback={null}>
+        <Courses />
+        <Faculty />
+        <Facilities />
+        <Contact />
+        <Footer />
+      </Suspense>
     </div>
   );
 }

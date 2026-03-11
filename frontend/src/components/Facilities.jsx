@@ -19,11 +19,18 @@ const Facilities = () => {
   return (
     <section className="facilities-section" id="facilities">
       <div className="container" style={{ maxWidth: '100%', padding: '0 1rem' }}>
-        <h2 className="section-title">Our Facilities</h2>
-        <p className="section-subtitle">
-          We provide a conducive environment equipped with all the essentials for an 
-          excellent educational journey.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">Our Facilities</h2>
+          <p className="section-subtitle">
+            We provide a conducive environment equipped with all the essentials for an 
+            excellent educational journey.
+          </p>
+        </motion.div>
 
         <div className="marquee-container">
           <motion.div 
@@ -41,11 +48,16 @@ const Facilities = () => {
             }}
           >
             {duplicatedFeatures.map((item, index) => (
-              <div key={index} className="facility-item glass-panel">
+              <motion.div 
+                key={`${item.title}-${index}`} 
+                className="facility-item glass-panel"
+                whileHover={{ scale: 1.05, y: -10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              >
                 <div className="facility-icon">{item.icon}</div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>

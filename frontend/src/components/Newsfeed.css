@@ -1,0 +1,122 @@
+.newsfeed-dropdown {
+  position: absolute;
+  top: calc(100% + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%) !important; /* Center relative to the Updates button */
+  width: 380px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px -12px rgba(15, 118, 110, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  cursor: default; /* override pointer from navbar if inherited */
+}
+
+/* Subtle notch pointer at top middle of dropdown */
+.newsfeed-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border-left: 1px solid rgba(20, 184, 166, 0.4);
+  border-top: 1px solid rgba(20, 184, 166, 0.4);
+}
+
+.newsfeed-dropdown-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+.newsfeed-dropdown-header h4 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.live-fade-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.newsfeed-dropdown-content {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+  /* Hide scrollbar visually while allowing scroll interaction */
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+.newsfeed-dropdown-content::-webkit-scrollbar {
+  display: none;
+}
+
+.dropdown-news-item {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  transition: background 0.2s ease;
+  line-height: 1.6;
+}
+
+.dropdown-news-item:hover {
+  background: rgba(20, 184, 166, 0.08); /* light teal tint */
+}
+
+.dropdown-news-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-news-text {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.urgent-badge {
+  background-color: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 0.15rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  margin-top: 0.2rem; /* align correctly with text baseline */
+}
+
+@media (max-width: 768px) {
+  .newsfeed-dropdown {
+    width: 300px;
+  }
+  .newsfeed-dropdown-content {
+    max-height: 200px; /* Constrain strictly to fit the screen */
+  }
+}

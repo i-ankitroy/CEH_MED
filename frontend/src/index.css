@@ -12,7 +12,7 @@
   --font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
 
   --nav-height: 80px;
-  --transition: all 0.3s ease-in-out;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --border-radius: 12px;
   --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
@@ -30,23 +30,31 @@ html {
 body {
   font-family: var(--font-main);
   background-color: var(--bg-color);
-  /* Refined, vibrant teal-focused gradient */
   background-image: 
-    radial-gradient(ellipse at top left, rgba(20, 184, 166, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse at bottom right, rgba(15, 118, 110, 0.3) 0%, transparent 60%),
-    radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, transparent 70%),
-    linear-gradient(135deg, rgba(240, 253, 250, 0.8) 0%, rgba(204, 251, 241, 0.3) 100%);
-  background-attachment: fixed; /* Creates parallax effect when scrolling */
-  background-size: cover;
+    radial-gradient(ellipse at top left, rgba(20, 184, 166, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(15, 118, 110, 0.1) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(240, 253, 250, 0.6) 0%, rgba(204, 251, 241, 0.2) 100%);
+  background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
+
+/* Global Parallax Background Styles */
+.app-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 800; /* Bolder headers */
+  line-height: 1.15;
+  letter-spacing: -0.02em; /* Tighter modern kerning */
 }
 
 a {
@@ -64,14 +72,14 @@ ul {
   text-align: center;
   font-size: 2.75rem; /* Slightly larger for impact */
   color: var(--primary-dark);
-  margin-bottom: 1.5rem; /* Increased spacing under title */
+  margin-bottom: 1rem; /* Reduced spacing under title */
 }
 
 .section-subtitle {
   text-align: center;
   color: var(--text-muted);
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto 2rem;
   font-size: 1.1rem;
 }
 
@@ -79,25 +87,27 @@ ul {
 .container {
   max-width: 1400px; /* Wider container for modern large screens */
   margin: 0 auto;
-  padding: 0 4rem; /* Increased side padding for better large-screen framing */
+  padding: 0 2rem; /* Reverting to 2rem to prevent squashing sub-components */
   width: 100%;
 }
 
 section {
-  padding: 6rem 0; /* Huge, clean top/bottom padding for every section */
+  padding: 4rem 0; /* Standardized, even top/bottom padding for every section */
 }
 
 /* Button Styles */
 .btn {
   display: inline-block;
   padding: 0.8rem 2rem;
-  border-radius: 50px; /* Pill shape */
+  border-radius: 50px;
   font-weight: 600;
   text-decoration: none;
-  transition: var(--transition); /* Changed from var(--transition-fast) to var(--transition) */
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), background 0.2s ease;
   cursor: pointer;
   border: none;
   font-size: 1.05rem;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .btn-primary {
@@ -134,24 +144,35 @@ section {
   transform: translateY(-3px);
 }
 
-/* Glassmorphism Effect */
+/* Premium Glassmorphism Effect */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: var(--border-radius);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.3) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  box-shadow: 0 15px 35px -5px rgba(15, 118, 110, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
 }
 
-/* Extreme Glass Panel - More transparent, larger blur */
+.glass-panel:hover {
+  box-shadow: 0 25px 50px -12px rgba(15, 118, 110, 0.25), inset 0 0 25px rgba(255, 255, 255, 0.7);
+}
+
+/* Extreme Glass Panel - For Hero images or primary emphasis */
 .extreme-glass {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  box-shadow: 0 20px 40px -10px rgba(31, 38, 135, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
 /* Removed static CSS Animations in favor of Framer Motion */

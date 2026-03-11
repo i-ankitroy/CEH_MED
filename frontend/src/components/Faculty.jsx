@@ -7,7 +7,7 @@ const Faculty = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/faculty')
+    fetch('http://localhost:8000/api/faculty')
       .then(res => res.json())
       .then(data => setFaculty(data))
       .catch(err => console.error(err));
@@ -43,12 +43,25 @@ const Faculty = () => {
   return (
     <section className="faculty-section" id="faculty">
       <div className="container">
-        <h2 className="section-title">Director & Faculty</h2>
-        <p className="section-subtitle">
-          Learn from experienced professionals dedicated to your success in Electro Homeopathy.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">Director & Faculty</h2>
+          <p className="section-subtitle">
+            Learn from experienced professionals dedicated to your success in Electro Homeopathy.
+          </p>
+        </motion.div>
 
-        <div className="director-card glass-panel">
+        <motion.div 
+          className="director-card glass-panel"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="director-img">
             {/* Using a reliable profile picture placeholder */}
             <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300" alt="Dr. S.P. Mahatha" />
@@ -62,9 +75,18 @@ const Faculty = () => {
               and practical training in Electro Homeopathy.
             </p>
           </div>
-        </div>
+        </motion.div>
 
-        <h3 className="section-title" style={{marginTop: '4rem', fontSize: '2.2rem'}}>Our Faculty Members</h3>
+        <motion.h3 
+          className="section-title" 
+          style={{marginTop: '4rem', fontSize: '2.2rem'}}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.8 }}
+          transition={{ duration: 0.5 }}
+        >
+          Our Faculty Members
+        </motion.h3>
         
         {faculty.length > 0 && (
           <div className="carousel-container">
