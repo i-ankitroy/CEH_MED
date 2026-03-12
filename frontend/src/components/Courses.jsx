@@ -8,7 +8,7 @@ const Courses = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/courses')
+    fetch(`${import.meta.env.VITE_API_URL}/api/courses`)
       .then(res => res.json())
       .then(data => {
         setCourses(data);

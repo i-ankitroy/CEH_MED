@@ -7,7 +7,7 @@ const Faculty = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/faculty')
+    fetch(`${import.meta.env.VITE_API_URL}/api/faculty`)
       .then(res => res.json())
       .then(data => setFaculty(data))
       .catch(err => console.error(err));

@@ -1,0 +1,13 @@
+services:
+  # Backend API (FastAPI)
+  - type: web
+    name: ceh-med-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: FRONTEND_URL
+        value: https://your-vercel-app.vercel.app   # ← Replace with your Vercel URL after deploying frontend
+      - key: PYTHON_VERSION
+        value: 3.11.0
